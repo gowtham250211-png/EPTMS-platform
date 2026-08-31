@@ -1,0 +1,49 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: eptms-postgres
+    environment:
+      POSTGRES_DB: eptms_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgrespassword
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - eptms-net
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: eptms-backend
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/eptms_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: postgrespassword
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - eptms-net
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: eptms-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - eptms-net
+
+volumes:
+  pgdata:
+
+networks:
+  eptms-net:
+    driver: bridge
