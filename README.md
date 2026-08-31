@@ -1,4 +1,3 @@
-cat << 'EOF' > README.md
 # ⚡ EPTMS - Enterprise Performance, Task & Leave Management System
 
 A production-grade, full-stack enterprise resource and workflow management platform featuring a **4-tier Role-Based Access Control (RBAC)** architecture, sector-based project delegation, hierarchical leave governance, gamification XP scoring, and containerized deployment.
