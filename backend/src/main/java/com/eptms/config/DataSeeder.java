@@ -7,6 +7,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.env.Environment;
+import java.util.Arrays;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,10 +25,23 @@ public class DataSeeder implements CommandLineRunner {
     private final TaskRepository taskRepository;
     private final LeaveRepository leaveRepository;
     private final PasswordEncoder passwordEncoder;
+    private final Environment environment;
+
+    @Value("${EPTMS_DEMO_SEED_ENABLED:true}")
+    private boolean demoSeedEnabled;
+
+    @Value("${EPTMS_DEMO_PASSWORD:}")
+    private String deployedDemoPassword;
 
     @Override
     public void run(String... args) {
-        if (userRepository.count() > 0) return;
+        if (!demoSeedEnabled || userRepository.count() > 0) return;
+
+        // The public demo must never be seeded with the well-known local passwords.
+        boolean production = Arrays.asList(environment.getActiveProfiles()).contains("prod");
+        if (production && (deployedDemoPassword == null || deployedDemoPassword.length() < 16)) {
+            throw new IllegalStateException("Set EPTMS_DEMO_PASSWORD to a unique password of at least 16 characters");
+        }
 
         Department eng = departmentRepository.save(Department.builder()
                 .name("Engineering")
@@ -35,7 +51,7 @@ public class DataSeeder implements CommandLineRunner {
         User admin = userRepository.save(User.builder()
                 .fullName("System Administrator")
                 .email("admin@eptms.io")
-                .password(passwordEncoder.encode("admin123"))
+                .password(passwordEncoder.encode(production ? deployedDemoPassword : "admin123"))
                 .role(Role.ROLE_ADMIN)
                 .performanceScore(98.0)
                 .xpPoints(2500)
@@ -44,7 +60,7 @@ public class DataSeeder implements CommandLineRunner {
         User manager = userRepository.save(User.builder()
                 .fullName("Priya Sharma")
                 .email("manager@eptms.io")
-                .password(passwordEncoder.encode("manager123"))
+                .password(passwordEncoder.encode(production ? deployedDemoPassword : "manager123"))
                 .role(Role.ROLE_MANAGER)
                 .performanceScore(94.0)
                 .xpPoints(1800)
@@ -53,7 +69,7 @@ public class DataSeeder implements CommandLineRunner {
         User tl = userRepository.save(User.builder()
                 .fullName("Karthik Raman")
                 .email("tl@eptms.io")
-                .password(passwordEncoder.encode("tl123"))
+                .password(passwordEncoder.encode(production ? deployedDemoPassword : "tl123"))
                 .role(Role.ROLE_TL)
                 .manager(manager)
                 .performanceScore(89.0)
@@ -73,7 +89,7 @@ public class DataSeeder implements CommandLineRunner {
         User employee = userRepository.save(User.builder()
                 .fullName("Arun Kumar")
                 .email("employee@eptms.io")
-                .password(passwordEncoder.encode("emp123"))
+                .password(passwordEncoder.encode(production ? deployedDemoPassword : "emp123"))
                 .role(Role.ROLE_EMPLOYEE)
                 .manager(manager)
                 .teamLeader(tl)

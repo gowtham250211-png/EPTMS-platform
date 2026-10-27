@@ -1,0 +1,5 @@
+# Production-only security override. The signing key must be set in Render.
+application:
+  security:
+    jwt:
+      secret-key: ${JWT_SECRET_KEY}

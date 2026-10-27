@@ -7,3 +7,8 @@
 .vscode/
 pgdata/
 *.log
+
+# Prevent accidental publication of local credentials
+.env
+.env.*
+!.env.example

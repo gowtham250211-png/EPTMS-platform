@@ -45,7 +45,8 @@ export const Login = () => {
 
   const fillCredentials = (roleEmail, pass) => {
     setEmail(roleEmail);
-    setPassword(pass);
+    // Public demo credentials are supplied privately, never bundled into production JS.
+    setPassword(import.meta.env.PROD ? '' : pass);
   };
 
   return (
@@ -109,7 +110,7 @@ export const Login = () => {
         </form>
 
         <div className="login-section-07">
-          <p className="login-description-02">Quick Login by Role</p>
+          <p className="login-description-02">{import.meta.env.PROD ? "Choose a Demo Role (password required)" : "Quick Login by Role"}</p>
           <div className="login-section-08">
             <button
               onClick={() => fillCredentials('admin@eptms.io', 'admin123')}
