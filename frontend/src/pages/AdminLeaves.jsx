@@ -22,43 +22,43 @@ export const AdminLeaves = () => {
   };
 
   return (
-    <div className="p-8 space-y-6">
+    <div className="admin-leaves-section-01">
       <div>
-        <h1 className="text-2xl font-black text-slate-900">Manager Leave Authorizations</h1>
-        <p className="text-xs font-medium text-slate-500">Review and authorize executive leave applications submitted by Department Managers</p>
+        <h1 className="admin-leaves-heading-01">Manager Leave Authorizations</h1>
+        <p className="admin-leaves-description-01">Review and authorize executive leave applications submitted by Department Managers</p>
       </div>
 
-      <div className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-xs">
-        <div className="p-4 border-b border-slate-100 font-extrabold text-xs text-slate-800 uppercase tracking-wider bg-slate-50/50">
+      <div className="admin-leaves-section-02">
+        <div className="admin-leaves-section-03">
           Pending Manager Applications
         </div>
-        <table className="w-full text-left text-xs">
-          <thead className="bg-slate-50 text-slate-500 uppercase border-b border-slate-200 font-bold">
+        <table className="admin-leaves-table-01">
+          <thead className="admin-leaves-thead-01">
             <tr>
-              <th className="p-4">Manager</th>
-              <th className="p-4">Category</th>
-              <th className="p-4">Duration</th>
-              <th className="p-4">Days</th>
-              <th className="p-4">Reason</th>
-              <th className="p-4">Decision</th>
+              <th className="admin-leaves-table-heading-01">Manager</th>
+              <th className="admin-leaves-table-heading-01">Category</th>
+              <th className="admin-leaves-table-heading-01">Duration</th>
+              <th className="admin-leaves-table-heading-01">Days</th>
+              <th className="admin-leaves-table-heading-01">Reason</th>
+              <th className="admin-leaves-table-heading-01">Decision</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-slate-100 text-slate-700 font-medium">
+          <tbody className="admin-leaves-tbody-01">
             {managerLeaves.length === 0 ? (
-              <tr><td colSpan={6} className="p-6 text-center text-slate-400">No manager leave requests pending approval.</td></tr>
+              <tr><td colSpan={6} className="admin-leaves-table-cell-01">No manager leave requests pending approval.</td></tr>
             ) : (
               managerLeaves.map((l) => (
-                <tr key={l.id} className="hover:bg-slate-50">
-                  <td className="p-4 font-bold text-slate-900">{l.employee?.fullName}</td>
-                  <td className="p-4 font-bold text-blue-700">{l.leaveType}</td>
-                  <td className="p-4">{l.startDate} to {l.endDate}</td>
-                  <td className="p-4 font-extrabold">{l.numberOfDays}</td>
-                  <td className="p-4 text-slate-500">{l.reason}</td>
-                  <td className="p-4 flex gap-2">
-                    <button onClick={() => handleAction(l.id, true)} className="px-3 py-1.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-bold cursor-pointer flex items-center gap-1">
+                <tr key={l.id} className="admin-leaves-table-row-01">
+                  <td className="admin-leaves-table-cell-02">{l.employee?.fullName}</td>
+                  <td className="admin-leaves-table-cell-03">{l.leaveType}</td>
+                  <td className="admin-leaves-table-cell-04">{l.startDate} to {l.endDate}</td>
+                  <td className="admin-leaves-table-cell-05">{l.numberOfDays}</td>
+                  <td className="admin-leaves-table-cell-06">{l.reason}</td>
+                  <td className="admin-leaves-table-cell-07">
+                    <button onClick={() => handleAction(l.id, true)} className="admin-leaves-button-01">
                       <Check size={13} /> Authorize
                     </button>
-                    <button onClick={() => handleAction(l.id, false)} className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-lg text-xs font-bold cursor-pointer flex items-center gap-1">
+                    <button onClick={() => handleAction(l.id, false)} className="admin-leaves-button-02">
                       <X size={13} /> Reject
                     </button>
                   </td>

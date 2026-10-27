@@ -10,26 +10,26 @@ export const AdminTasks = () => {
   }, []);
 
   return (
-    <div className="p-8 space-y-6">
+    <div className="admin-tasks-section-01">
       <div>
-        <h1 className="text-2xl font-black text-slate-900">Organization Task Activity Monitor</h1>
-        <p className="text-xs font-medium text-slate-500">Global audit of all deliverables across every sector and department</p>
+        <h1 className="admin-tasks-heading-01">Organization Task Activity Monitor</h1>
+        <p className="admin-tasks-description-01">Global audit of all deliverables across every sector and department</p>
       </div>
 
-      <div className="bg-white border border-slate-200/80 rounded-2xl p-6 shadow-xs space-y-3">
+      <div className="admin-tasks-section-02">
         {tasks.map((task) => (
-          <div key={task.id} className="p-4 bg-slate-50 border border-slate-200/80 rounded-xl flex items-center justify-between">
+          <div key={task.id} className="admin-tasks-section-03">
             <div>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-md">{task.sector || 'Core'}</span>
-                <h3 className="text-sm font-extrabold text-slate-900">{task.title}</h3>
+              <div className="admin-tasks-section-04">
+                <span className="admin-tasks-text-01">{task.sector || 'Core'}</span>
+                <h3 className="admin-tasks-heading-02">{task.title}</h3>
               </div>
-              <p className="text-xs text-slate-500">{task.description}</p>
-              <p className="text-[11px] text-slate-400 mt-1">
-                Assignee: <strong className="text-slate-700">{task.assignedTo?.fullName}</strong> | Created By: <strong className="text-slate-700">{task.createdBy?.fullName}</strong>
+              <p className="admin-tasks-description-02">{task.description}</p>
+              <p className="admin-tasks-description-03">
+                Assignee: <strong className="admin-tasks-emphasis-01">{task.assignedTo?.fullName}</strong> | Created By: <strong className="admin-tasks-emphasis-01">{task.createdBy?.fullName}</strong>
               </p>
             </div>
-            <span className="px-3 py-1 rounded-full text-[10px] font-bold bg-slate-200 text-slate-700">{task.status}</span>
+            <span className="admin-tasks-text-02">{task.status}</span>
           </div>
         ))}
       </div>

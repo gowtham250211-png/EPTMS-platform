@@ -30,9 +30,9 @@ const ProtectedLayout = ({ children }) => {
   if (!token) return <Navigate to="/login" replace />;
 
   return (
-    <div className="flex min-h-screen bg-slate-50 text-slate-900 font-sans">
+    <div className="app-section-01">
       <Sidebar />
-      <main className="flex-1 overflow-y-auto">{children}</main>
+      <main className="app-main-01">{children}</main>
     </div>
   );
 };

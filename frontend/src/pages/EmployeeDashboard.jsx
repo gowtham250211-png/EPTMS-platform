@@ -28,93 +28,93 @@ export const EmployeeDashboard = () => {
   };
 
   return (
-    <div className="p-8 space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="employee-dashboard-section-01">
+      <div className="employee-dashboard-section-02">
         <div>
-          <h1 className="text-2xl font-bold text-slate-900">My Workspace</h1>
-          <p className="text-xs text-slate-500">
+          <h1 className="employee-dashboard-heading-01">My Workspace</h1>
+          <p className="employee-dashboard-description-01">
             Welcome back, {user?.fullName} · Team: {user?.teamName || 'Core Operations'}
           </p>
         </div>
         <Link
           to="/leave"
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-xs font-semibold shadow-sm"
+          className="employee-dashboard-link-01"
         >
           <Calendar size={15} />
           <span>Apply for Leave</span>
         </Link>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-5">
-        <div className="p-5 bg-white border border-slate-200 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-slate-500 uppercase">Performance</span>
-            <Zap className="text-amber-500" size={18} />
+      <div className="employee-dashboard-section-03">
+        <div className="employee-dashboard-section-04">
+          <div className="employee-dashboard-section-05">
+            <span className="employee-dashboard-text-01">Performance</span>
+            <Zap className="employee-dashboard-zap-01" size={18} />
           </div>
-          <div className="text-2xl font-extrabold text-slate-900 mb-2">
+          <div className="employee-dashboard-section-06">
             {user?.performanceScore ?? 87} / 100
           </div>
-          <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-            <div
-              className="bg-emerald-500 h-2 rounded-full"
-              style={{ width: `${user?.performanceScore ?? 87}%` }}
-            ></div>
-          </div>
+          <progress
+            className="employee-performance-progress"
+            value={user?.performanceScore ?? 87}
+            max={100}
+            aria-label="Performance score"
+          />
         </div>
 
-        <div className="p-5 bg-white border border-slate-200 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-slate-500 uppercase">Gamification XP</span>
-            <Award className="text-indigo-600" size={18} />
+        <div className="employee-dashboard-section-04">
+          <div className="employee-dashboard-section-05">
+            <span className="employee-dashboard-text-01">Gamification XP</span>
+            <Award className="employee-dashboard-award-01" size={18} />
           </div>
-          <div className="text-2xl font-extrabold text-slate-900">
+          <div className="employee-dashboard-section-09">
             {user?.xpPoints ?? 950} XP
           </div>
-          <p className="text-xs text-indigo-600 font-semibold mt-1">Level 4 Contributor</p>
+          <p className="employee-dashboard-description-02">Level 4 Contributor</p>
         </div>
 
-        <div className="p-5 bg-white border border-slate-200 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-slate-500 uppercase">Active Tasks</span>
-            <CheckCircle className="text-blue-600" size={18} />
+        <div className="employee-dashboard-section-04">
+          <div className="employee-dashboard-section-05">
+            <span className="employee-dashboard-text-01">Active Tasks</span>
+            <CheckCircle className="employee-dashboard-check-circle-01" size={18} />
           </div>
-          <div className="text-2xl font-extrabold text-slate-900">
+          <div className="employee-dashboard-section-09">
             {tasks.filter((t) => t.status !== 'COMPLETED').length}
           </div>
-          <p className="text-xs text-slate-500 mt-1">Assigned by Team Leader</p>
+          <p className="employee-dashboard-description-03">Assigned by Team Leader</p>
         </div>
 
-        <div className="p-5 bg-white border border-slate-200 rounded-xl shadow-sm">
-          <div className="flex items-center justify-between mb-3">
-            <span className="text-xs font-semibold text-slate-500 uppercase">Leave Balances</span>
-            <Calendar className="text-emerald-600" size={18} />
+        <div className="employee-dashboard-section-04">
+          <div className="employee-dashboard-section-05">
+            <span className="employee-dashboard-text-01">Leave Balances</span>
+            <Calendar className="employee-dashboard-calendar-01" size={18} />
           </div>
-          <div className="text-xs font-medium text-slate-700 space-y-1">
-            <p>Casual: <strong className="text-slate-900">{user?.casualLeave ?? 12}</strong></p>
-            <p>Sick: <strong className="text-slate-900">{user?.sickLeave ?? 8}</strong></p>
+          <div className="employee-dashboard-section-10">
+            <p>Casual: <strong className="employee-dashboard-emphasis-01">{user?.casualLeave ?? 12}</strong></p>
+            <p>Sick: <strong className="employee-dashboard-emphasis-01">{user?.sickLeave ?? 8}</strong></p>
           </div>
         </div>
       </div>
 
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-        <h2 className="text-sm font-bold text-slate-800 mb-4">My Assigned Tasks (Execution & Updates)</h2>
+      <div className="employee-dashboard-section-11">
+        <h2 className="employee-dashboard-heading-02">My Assigned Tasks (Execution & Updates)</h2>
         {tasks.length === 0 ? (
-          <p className="text-xs text-slate-400 py-4 text-center">No tasks assigned yet.</p>
+          <p className="employee-dashboard-description-04">No tasks assigned yet.</p>
         ) : (
-          <div className="space-y-3">
+          <div className="employee-dashboard-section-12">
             {tasks.map((task) => (
               <div
                 key={task.id}
-                className="p-4 bg-slate-50 border border-slate-200 rounded-lg flex items-center justify-between"
+                className="employee-dashboard-section-13"
               >
                 <div>
-                  <h3 className="text-sm font-bold text-slate-900">{task.title}</h3>
-                  <p className="text-xs text-slate-600 mt-1">{task.description}</p>
-                  <div className="flex gap-2 mt-2">
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-200 text-slate-700">
+                  <h3 className="employee-dashboard-heading-03">{task.title}</h3>
+                  <p className="employee-dashboard-description-05">{task.description}</p>
+                  <div className="employee-dashboard-section-14">
+                    <span className="employee-dashboard-text-02">
                       {task.priority}
                     </span>
-                    <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-blue-100 text-blue-700">
+                    <span className="employee-dashboard-text-03">
                       {task.status}
                     </span>
                   </div>
@@ -122,12 +122,12 @@ export const EmployeeDashboard = () => {
                 {task.status !== 'COMPLETED' ? (
                   <button
                     onClick={() => completeTask(task.id)}
-                    className="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg text-xs font-semibold transition-all shadow-sm cursor-pointer"
+                    className="employee-dashboard-button-01"
                   >
                     Mark Complete (+15 XP)
                   </button>
                 ) : (
-                  <span className="text-xs font-bold text-emerald-600 flex items-center gap-1">
+                  <span className="employee-dashboard-text-04">
                     <CheckCircle size={14} /> Completed
                   </span>
                 )}

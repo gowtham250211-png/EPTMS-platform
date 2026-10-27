@@ -48,36 +48,36 @@ export const TLDashboard = () => {
   };
 
   return (
-    <div className="p-8 space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="tldashboard-section-01">
+      <div className="tldashboard-section-02">
         <div>
-          <h1 className="text-2xl font-black text-slate-900">Team Leader Command</h1>
-          <p className="text-xs font-medium text-slate-500">
+          <h1 className="tldashboard-heading-01">Team Leader Command</h1>
+          <p className="tldashboard-description-01">
             Monitor direct reports, assign sprint deliverables, and track velocity
           </p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-md shadow-blue-500/20 cursor-pointer"
+          className="tldashboard-button-01"
         >
           <Plus size={16} /> Assign Task to Employee
         </button>
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 border-b border-slate-200 pb-2">
+      <div className="tldashboard-section-03">
         <button
           onClick={() => setActiveTab('overview')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-            activeTab === 'overview' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+          className={`tldashboard-button-02 ${
+            activeTab === 'overview' ? 'tldashboard-button-03' : 'tldashboard-button-04'
           }`}
         >
           <Users size={15} /> Team Overview
         </button>
         <button
           onClick={() => setActiveTab('kanban')}
-          className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-            activeTab === 'kanban' ? 'bg-blue-600 text-white shadow-xs' : 'text-slate-600 hover:bg-slate-100'
+          className={`tldashboard-button-02 ${
+            activeTab === 'kanban' ? 'tldashboard-button-03' : 'tldashboard-button-04'
           }`}
         >
           <CheckSquare size={15} /> Sprint Kanban Board
@@ -85,47 +85,47 @@ export const TLDashboard = () => {
       </div>
 
       {activeTab === 'overview' ? (
-        <div className="space-y-6">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Direct Members</span>
-              <p className="text-2xl font-black text-slate-900 mt-1">{teamMembers.length}</p>
+        <div className="tldashboard-section-04">
+          <div className="tldashboard-section-05">
+            <div className="tldashboard-section-06">
+              <span className="tldashboard-text-01">Direct Members</span>
+              <p className="tldashboard-description-02">{teamMembers.length}</p>
             </div>
-            <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Active Deliverables</span>
-              <p className="text-2xl font-black text-blue-600 mt-1">
+            <div className="tldashboard-section-06">
+              <span className="tldashboard-text-01">Active Deliverables</span>
+              <p className="tldashboard-description-03">
                 {tasks.filter((t) => t.status !== 'COMPLETED').length}
               </p>
             </div>
-            <div className="p-5 bg-white border border-slate-200/80 rounded-2xl shadow-xs">
-              <span className="text-xs font-bold text-slate-400 uppercase tracking-wider">Sprint Velocity</span>
-              <p className="text-2xl font-black text-emerald-600 mt-1">94.8%</p>
+            <div className="tldashboard-section-06">
+              <span className="tldashboard-text-01">Sprint Velocity</span>
+              <p className="tldashboard-description-04">94.8%</p>
             </div>
           </div>
 
-          <div className="bg-white border border-slate-200/80 rounded-2xl overflow-hidden shadow-xs">
-            <div className="p-4 border-b border-slate-100 font-extrabold text-xs text-slate-800 uppercase tracking-wider bg-slate-50/50">
+          <div className="tldashboard-section-07">
+            <div className="tldashboard-section-08">
               Assigned Team Personnel Directory
             </div>
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-500 uppercase border-b border-slate-200 font-bold">
+            <table className="tldashboard-table-01">
+              <thead className="tldashboard-thead-01">
                 <tr>
-                  <th className="p-4">Staff Member</th>
-                  <th className="p-4">Email</th>
-                  <th className="p-4">Performance Score</th>
-                  <th className="p-4">XP Points</th>
-                  <th className="p-4">Active Tasks</th>
+                  <th className="tldashboard-table-heading-01">Staff Member</th>
+                  <th className="tldashboard-table-heading-01">Email</th>
+                  <th className="tldashboard-table-heading-01">Performance Score</th>
+                  <th className="tldashboard-table-heading-01">XP Points</th>
+                  <th className="tldashboard-table-heading-01">Active Tasks</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 text-slate-700 font-medium">
+              <tbody className="tldashboard-tbody-01">
                 {teamMembers.map((m) => (
-                  <tr key={m.id} className="hover:bg-slate-50/70">
-                    <td className="p-4 font-bold text-slate-900">{m.fullName}</td>
-                    <td className="p-4">{m.email}</td>
-                    <td className="p-4 font-extrabold text-emerald-600">{m.performanceScore ?? 85}%</td>
-                    <td className="p-4 font-bold text-indigo-600">{m.xpPoints ?? 0} XP</td>
-                    <td className="p-4">
-                      <span className="px-2.5 py-1 bg-blue-50 text-blue-700 rounded-md font-bold text-[11px] border border-blue-200">
+                  <tr key={m.id} className="tldashboard-table-row-01">
+                    <td className="tldashboard-table-cell-01">{m.fullName}</td>
+                    <td className="tldashboard-table-cell-02">{m.email}</td>
+                    <td className="tldashboard-table-cell-03">{m.performanceScore ?? 85}%</td>
+                    <td className="tldashboard-table-cell-04">{m.xpPoints ?? 0} XP</td>
+                    <td className="tldashboard-table-cell-02">
+                      <span className="tldashboard-text-02">
                         {tasks.filter((t) => t.assignedTo?.id === m.id && t.status !== 'COMPLETED').length} Tasks
                       </span>
                     </td>
@@ -136,24 +136,24 @@ export const TLDashboard = () => {
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div className="tldashboard-section-09">
           {['ASSIGNED', 'IN_PROGRESS', 'IN_REVIEW', 'COMPLETED'].map((status) => (
-            <div key={status} className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-xs">
-              <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+            <div key={status} className="tldashboard-section-10">
+              <h2 className="tldashboard-heading-02">
                 {status.replace('_', ' ')}
               </h2>
-              <div className="space-y-3">
+              <div className="tldashboard-section-11">
                 {tasks
                   .filter((t) => t.status === status)
                   .map((task) => (
-                    <div key={task.id} className="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl">
-                      <span className="text-[10px] font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-md">
+                    <div key={task.id} className="tldashboard-section-12">
+                      <span className="tldashboard-text-03">
                         {task.sector || 'Core'}
                       </span>
-                      <h3 className="text-xs font-extrabold text-slate-900 mt-1.5">{task.title}</h3>
-                      <p className="text-[11px] text-slate-500 mt-1">{task.description}</p>
-                      <p className="text-[10px] text-slate-400 mt-2 font-semibold">
-                        Assignee: <strong className="text-slate-700">{task.assignedTo?.fullName}</strong>
+                      <h3 className="tldashboard-heading-03">{task.title}</h3>
+                      <p className="tldashboard-description-05">{task.description}</p>
+                      <p className="tldashboard-description-06">
+                        Assignee: <strong className="tldashboard-emphasis-01">{task.assignedTo?.fullName}</strong>
                       </p>
                     </div>
                   ))}
@@ -165,36 +165,36 @@ export const TLDashboard = () => {
 
       {/* Task Delegation Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <form onSubmit={handleCreateTask} className="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-xl">
-            <h3 className="text-base font-black text-slate-900">Assign Work Item to Employee</h3>
+        <div className="tldashboard-section-13">
+          <form onSubmit={handleCreateTask} className="tldashboard-form-01">
+            <h3 className="tldashboard-heading-04">Assign Work Item to Employee</h3>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Task Title</label>
+              <label className="tldashboard-label-01">Task Title</label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
+                className="tldashboard-input-01"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Domain Sector</label>
+              <label className="tldashboard-label-01">Domain Sector</label>
               <input
                 type="text"
                 required
                 value={sector}
                 onChange={(e) => setSector(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
+                className="tldashboard-input-01"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Assign to Employee</label>
+              <label className="tldashboard-label-01">Assign to Employee</label>
               <select
                 required
                 value={assignedToId}
                 onChange={(e) => setAssignedToId(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold"
+                className="tldashboard-select-01"
               >
                 <option value="">Select Employee</option>
                 {teamMembers.map((emp) => (
@@ -205,36 +205,36 @@ export const TLDashboard = () => {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Due Date</label>
+              <label className="tldashboard-label-01">Due Date</label>
               <input
                 type="date"
                 required
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
+                className="tldashboard-input-01"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Description</label>
+              <label className="tldashboard-label-01">Description</label>
               <textarea
                 required
                 rows={2}
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
+                className="tldashboard-textarea-01"
               />
             </div>
-            <div className="flex justify-end gap-2 pt-2">
+            <div className="tldashboard-section-14">
               <button
                 type="button"
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-xs font-bold cursor-pointer"
+                className="tldashboard-button-05"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold cursor-pointer"
+                className="tldashboard-button-06"
               >
                 Assign Deliverable
               </button>

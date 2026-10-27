@@ -44,19 +44,19 @@ export const Sidebar = () => {
   };
 
   return (
-    <aside className="w-64 bg-white border-r border-slate-200 flex flex-col justify-between h-screen sticky top-0 shadow-xs select-none">
+    <aside className="sidebar-sidebar-01">
       <div>
-        <div className="p-6 border-b border-slate-100 flex items-center gap-3">
-          <div className="w-9 h-9 rounded-xl bg-blue-600 flex items-center justify-center font-bold text-white shadow-md shadow-blue-500/20">
+        <div className="sidebar-section-01">
+          <div className="sidebar-section-02">
             <Briefcase size={20} />
           </div>
           <div>
-            <h1 className="font-extrabold text-slate-900 tracking-wide text-sm">EPTMS Platform</h1>
-            <p className="text-[11px] font-bold text-blue-600 uppercase tracking-wider">{user?.role?.replace('ROLE_', '')}</p>
+            <h1 className="sidebar-heading-01">EPTMS Platform</h1>
+            <p className="sidebar-description-01">{user?.role?.replace('ROLE_', '')}</p>
           </div>
         </div>
 
-        <nav className="p-4 space-y-1.5">
+        <nav className="sidebar-navigation-01">
           {getNavLinks().map((link) => {
             const Icon = link.icon;
             const active = location.pathname === link.path;
@@ -64,13 +64,13 @@ export const Sidebar = () => {
               <Link
                 key={link.path}
                 to={link.path}
-                className={`flex items-center gap-3 px-4 py-2.5 rounded-xl text-sm font-semibold transition-all ${
+                className={`sidebar-link-01 ${
                   active 
-                    ? 'bg-blue-50 text-blue-700 shadow-xs border border-blue-100' 
-                    : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
+                    ? 'sidebar-link-02' 
+                    : 'sidebar-link-03'
                 }`}
               >
-                <Icon size={18} className={active ? 'text-blue-600' : 'text-slate-400'} />
+                <Icon size={18} className={active ? 'sidebar-icon-01' : 'sidebar-icon-02'} />
                 {link.name}
               </Link>
             );
@@ -78,19 +78,19 @@ export const Sidebar = () => {
         </nav>
       </div>
 
-      <div className="p-4 border-t border-slate-100">
-        <div className="flex items-center gap-3 px-3 py-2.5 mb-3 bg-slate-50 rounded-xl border border-slate-200/60">
-          <div className="w-8 h-8 rounded-lg bg-blue-600 text-white flex items-center justify-center text-xs font-bold shadow-xs">
+      <div className="sidebar-section-03">
+        <div className="sidebar-section-04">
+          <div className="sidebar-section-05">
             {user?.fullName?.charAt(0) || 'U'}
           </div>
-          <div className="overflow-hidden">
-            <p className="text-xs font-bold text-slate-800 truncate">{user?.fullName}</p>
-            <p className="text-[11px] font-medium text-slate-500 truncate">{user?.email}</p>
+          <div className="sidebar-section-06">
+            <p className="sidebar-description-02">{user?.fullName}</p>
+            <p className="sidebar-description-03">{user?.email}</p>
           </div>
         </div>
         <button
           onClick={handleLogout}
-          className="w-full flex items-center justify-center gap-2 px-3 py-2.5 rounded-xl text-xs font-bold text-red-600 hover:bg-red-50 transition-all border border-red-100 cursor-pointer"
+          className="sidebar-button-01"
         >
           <LogOut size={14} /> Sign Out
         </button>

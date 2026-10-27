@@ -46,41 +46,41 @@ export const TLTaskAssignment = () => {
   };
 
   return (
-    <div className="p-8 space-y-6">
-      <div className="flex justify-between items-center">
+    <div className="tltask-assignment-section-01">
+      <div className="tltask-assignment-section-02">
         <div>
-          <h1 className="text-2xl font-black text-slate-900">Sprint Task Delegation</h1>
-          <p className="text-xs font-medium text-slate-500">
+          <h1 className="tltask-assignment-heading-01">Sprint Task Delegation</h1>
+          <p className="tltask-assignment-description-01">
             Create, assign, and track employee sprint deliverables on the Kanban board
           </p>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold shadow-md shadow-blue-500/20 cursor-pointer"
+          className="tltask-assignment-button-01"
         >
           <Plus size={16} /> Assign Deliverable to Employee
         </button>
       </div>
 
       {/* Kanban Board */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="tltask-assignment-section-03">
         {['ASSIGNED', 'IN_PROGRESS', 'IN_REVIEW', 'COMPLETED'].map((status) => (
-          <div key={status} className="bg-white border border-slate-200/80 rounded-2xl p-4 shadow-xs">
-            <h2 className="text-xs font-bold text-slate-500 uppercase tracking-wider mb-3">
+          <div key={status} className="tltask-assignment-section-04">
+            <h2 className="tltask-assignment-heading-02">
               {status.replace('_', ' ')}
             </h2>
-            <div className="space-y-3">
+            <div className="tltask-assignment-section-05">
               {tasks
                 .filter((t) => t.status === status)
                 .map((task) => (
-                  <div key={task.id} className="p-3.5 bg-slate-50 border border-slate-200/80 rounded-xl space-y-1.5">
-                    <span className="text-[10px] font-bold text-blue-700 bg-blue-100 px-2 py-0.5 rounded-md">
+                  <div key={task.id} className="tltask-assignment-section-06">
+                    <span className="tltask-assignment-text-01">
                       {task.sector || 'Core'}
                     </span>
-                    <h3 className="text-xs font-extrabold text-slate-900">{task.title}</h3>
-                    <p className="text-[11px] text-slate-500">{task.description}</p>
-                    <p className="text-[10px] text-slate-400 font-semibold pt-1 border-t border-slate-200/60">
-                      Assignee: <strong className="text-slate-700">{task.assignedTo?.fullName || 'Unassigned'}</strong>
+                    <h3 className="tltask-assignment-heading-03">{task.title}</h3>
+                    <p className="tltask-assignment-description-02">{task.description}</p>
+                    <p className="tltask-assignment-description-03">
+                      Assignee: <strong className="tltask-assignment-emphasis-01">{task.assignedTo?.fullName || 'Unassigned'}</strong>
                     </p>
                   </div>
                 ))}
@@ -91,36 +91,36 @@ export const TLTaskAssignment = () => {
 
       {/* Task Creation Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center p-4 z-50">
-          <form onSubmit={handleCreateTask} className="bg-white border border-slate-200 rounded-2xl max-w-md w-full p-6 space-y-4 shadow-xl">
-            <h3 className="text-base font-black text-slate-900">Assign Work Item to Employee</h3>
+        <div className="tltask-assignment-section-07">
+          <form onSubmit={handleCreateTask} className="tltask-assignment-form-01">
+            <h3 className="tltask-assignment-heading-04">Assign Work Item to Employee</h3>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Task Title</label>
+              <label className="tltask-assignment-label-01">Task Title</label>
               <input
                 type="text"
                 required
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
+                className="tltask-assignment-input-01"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Sector Domain</label>
+              <label className="tltask-assignment-label-01">Sector Domain</label>
               <input
                 type="text"
                 required
                 value={sector}
                 onChange={(e) => setSector(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
+                className="tltask-assignment-input-01"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Assign to Employee</label>
+              <label className="tltask-assignment-label-01">Assign to Employee</label>
               <select
                 required
                 value={assignedToId}
                 onChange={(e) => setAssignedToId(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold"
+                className="tltask-assignment-select-01"
               >
                 <option value="">Select Employee</option>
                 {teamMembers.map((emp) => (
@@ -131,36 +131,36 @@ export const TLTaskAssignment = () => {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Due Date</label>
+              <label className="tltask-assignment-label-01">Due Date</label>
               <input
                 type="date"
                 required
                 value={dueDate}
                 onChange={(e) => setDueDate(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
+                className="tltask-assignment-input-01"
               />
             </div>
             <div>
-              <label className="block text-xs font-bold text-slate-700 mb-1">Description</label>
+              <label className="tltask-assignment-label-01">Description</label>
               <textarea
                 required
                 rows={2}
                 value={desc}
                 onChange={(e) => setDesc(e.target.value)}
-                className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium"
+                className="tltask-assignment-textarea-01"
               />
             </div>
-            <div className="flex justify-end gap-2 pt-2">
+            <div className="tltask-assignment-section-08">
               <button
                 type="button"
                 onClick={() => setShowModal(false)}
-                className="px-4 py-2 bg-slate-100 text-slate-700 rounded-xl text-xs font-bold cursor-pointer"
+                className="tltask-assignment-button-02"
               >
                 Cancel
               </button>
               <button
                 type="submit"
-                className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-xs font-bold cursor-pointer"
+                className="tltask-assignment-button-03"
               >
                 Assign Deliverable
               </button>
