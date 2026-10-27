@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import java.util.Arrays;
+import java.util.List;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -33,14 +34,40 @@ public class DataSeeder implements CommandLineRunner {
     @Value("${EPTMS_DEMO_PASSWORD:}")
     private String deployedDemoPassword;
 
+    // Explicit one-time migration for a dedicated, disposable PUBLIC DEMO database.
+    // NEVER enable on a database that contains real employee accounts or data.
+    @Value("${EPTMS_RESET_DEMO_PASSWORDS:false}")
+    private boolean resetDemoPasswords;
+
     @Override
     public void run(String... args) {
-        if (!demoSeedEnabled || userRepository.count() > 0) return;
+        if (!demoSeedEnabled) return;
 
-        // The public demo must never be seeded with the well-known local passwords.
         boolean production = Arrays.asList(environment.getActiveProfiles()).contains("prod");
-        if (production && (deployedDemoPassword == null || deployedDemoPassword.length() < 16)) {
+        long userCount = userRepository.count();
+        if (production && (userCount == 0 || resetDemoPasswords)
+                && (deployedDemoPassword == null || deployedDemoPassword.length() < 16)) {
             throw new IllegalStateException("Set EPTMS_DEMO_PASSWORD to a unique password of at least 16 characters");
+        }
+
+        // Explicit opt-in: update ONLY the 4 known disposable demo accounts.
+        // Turn EPTMS_RESET_DEMO_PASSWORDS off after the first successful reset.
+        if (userCount > 0) {
+            if (production && resetDemoPasswords) {
+                int changed = 0;
+                for (String email : List.of("admin@eptms.io", "manager@eptms.io",
+                        "tl@eptms.io", "employee@eptms.io")) {
+                    var user = userRepository.findByEmail(email);
+                    if (user.isPresent()) {
+                        User existing = user.get();
+                        existing.setPassword(passwordEncoder.encode(deployedDemoPassword));
+                        userRepository.save(existing);
+                        changed++;
+                    }
+                }
+                log.info("Demo password reset completed for {} existing sample accounts", changed);
+            }
+            return;
         }
 
         Department eng = departmentRepository.save(Department.builder()
